@@ -52,20 +52,27 @@ namespace ExpenseManager
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(370, 9);
+            this.label1.Location = new System.Drawing.Point(493, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(244, 31);
+            this.label1.Size = new System.Drawing.Size(197, 26);
             this.label1.TabIndex = 0;
             this.label1.Text = "Edit your expenses";
             // 
             // months
             // 
+            this.months.AllowDrop = true;
+            this.months.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.months.ForeColor = System.Drawing.SystemColors.WindowText;
             this.months.FormattingEnabled = true;
-            this.months.Location = new System.Drawing.Point(12, 9);
+            this.months.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.months.Location = new System.Drawing.Point(16, 11);
+            this.months.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.months.Name = "months";
-            this.months.Size = new System.Drawing.Size(176, 21);
+            this.months.Size = new System.Drawing.Size(233, 24);
             this.months.TabIndex = 1;
             this.months.SelectedIndexChanged += new System.EventHandler(this.months_SelectedIndexChanged);
+            this.months.SelectionChangeCommitted += new System.EventHandler(this.months_SelectionChangeCommitted);
             // 
             // ExpensesByMonth
             // 
@@ -78,14 +85,15 @@ namespace ExpenseManager
             this.payments,
             this.continual,
             this.comments});
-            this.ExpensesByMonth.Location = new System.Drawing.Point(12, 88);
+            this.ExpensesByMonth.Location = new System.Drawing.Point(16, 108);
+            this.ExpensesByMonth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ExpensesByMonth.Name = "ExpensesByMonth";
             this.ExpensesByMonth.RowHeadersWidth = 51;
-            this.ExpensesByMonth.Size = new System.Drawing.Size(914, 402);
+            this.ExpensesByMonth.Size = new System.Drawing.Size(1219, 495);
             this.ExpensesByMonth.TabIndex = 2;
+            this.ExpensesByMonth.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExpensesByMonth_CellEndEdit);
             this.ExpensesByMonth.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ExpensesByMonth_CellMouseClick);
             this.ExpensesByMonth.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.ExpensesByMonth_DefaultValuesNeeded);
-            this.ExpensesByMonth.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExpensesByMonth_CellEndEdit);
             // 
             // description
             // 
@@ -141,9 +149,10 @@ namespace ExpenseManager
             // 
             // home
             // 
-            this.home.Location = new System.Drawing.Point(852, 9);
+            this.home.Location = new System.Drawing.Point(1136, 11);
+            this.home.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.home.Name = "home";
-            this.home.Size = new System.Drawing.Size(51, 47);
+            this.home.Size = new System.Drawing.Size(68, 58);
             this.home.TabIndex = 3;
             this.home.Text = "home";
             this.home.UseVisualStyleBackColor = true;
@@ -151,9 +160,10 @@ namespace ExpenseManager
             // 
             // save
             // 
-            this.save.Location = new System.Drawing.Point(837, 509);
+            this.save.Location = new System.Drawing.Point(1116, 626);
+            this.save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.save.Name = "save";
-            this.save.Size = new System.Drawing.Size(66, 29);
+            this.save.Size = new System.Drawing.Size(88, 36);
             this.save.TabIndex = 4;
             this.save.Text = "save";
             this.save.UseVisualStyleBackColor = true;
@@ -162,34 +172,37 @@ namespace ExpenseManager
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 96);
+            this.label2.Location = new System.Drawing.Point(27, 118);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 15);
+            this.label2.Size = new System.Drawing.Size(44, 16);
             this.label2.TabIndex = 5;
             this.label2.Text = "label2";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 522);
+            this.label3.Location = new System.Drawing.Point(25, 642);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 15);
+            this.label3.Size = new System.Drawing.Size(41, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Total:";
             // 
             // total
             // 
             this.total.AutoSize = true;
-            this.total.Location = new System.Drawing.Point(111, 522);
+            this.total.Location = new System.Drawing.Point(148, 642);
+            this.total.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.total.Name = "total";
-            this.total.Size = new System.Drawing.Size(0, 15);
+            this.total.Size = new System.Drawing.Size(0, 16);
             this.total.TabIndex = 7;
             // 
             // MontlyExpenses
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(938, 550);
+            this.ClientSize = new System.Drawing.Size(1251, 677);
             this.Controls.Add(this.total);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -198,6 +211,7 @@ namespace ExpenseManager
             this.Controls.Add(this.ExpensesByMonth);
             this.Controls.Add(this.months);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MontlyExpenses";
             this.Text = "MontlyExpenses";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MontlyExpenses_FormClosing);
@@ -211,7 +225,6 @@ namespace ExpenseManager
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox months;
         private System.Windows.Forms.DataGridView ExpensesByMonth;
         private System.Windows.Forms.Button home;
         private System.Windows.Forms.Button save;
@@ -225,5 +238,6 @@ namespace ExpenseManager
         private Label label2;
         private Label label3;
         private Label total;
+        private ComboBox months;
     }
 }

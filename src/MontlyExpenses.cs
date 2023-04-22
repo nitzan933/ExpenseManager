@@ -5,10 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComboBox = System.Windows.Forms.ComboBox;
 
 namespace ExpenseManager
 {
@@ -40,6 +43,7 @@ namespace ExpenseManager
             e.Row.Cells["date"].Value = DateTime.Now.ToString("dd/MM/yyyy");
             e.Row.Cells["continual"].Value = false;
             e.Row.Cells["amount"].Value = 0;
+            e.Row.Cells["payments"].Value = 1;
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -77,17 +81,16 @@ namespace ExpenseManager
             {
                 System.Windows.Forms.MessageBox.Show("There was an error while saving your data. Please try again.");
             }
+        }
 
-            //table.SelectAll();
-            //try
-            //{
-            //    File.WriteAllText(fileName, table.GetClipboardContent().GetText(TextDataFormat.CommaSeparatedValue));
-            //    System.Windows.Forms.MessageBox.Show("Your data is saved.");
-            //} catch
-            //{
-            //    System.Windows.Forms.MessageBox.Show("There was an error while saving your data. Please try again.");
-            //}
-            //table.ClearSelection();
+        private void months_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if(this.months.Text.Equals("") == false && this.months.Items.Contains(this.months.Text) == false)
+            {
+                lmonths.Insert(0, this.months.Text.ToString());
+                this.months.SelectedIndex = 0;
+                this.ExpensesByMonth.Rows.Clear();
+            }
         }
 
             private void months_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,16 +113,17 @@ namespace ExpenseManager
                 data = File.ReadAllText(fileName);
             }catch
             {
-                System.Windows.Forms.MessageBox.Show("There was an error while importing your data. Please try again.");
                 return;
             }
             DataGridView table = this.ExpensesByMonth;
             String[] rows = data.Split('\n');
             table.Rows.Clear();
-            for (int i=0; i< rows.Length - 2; i++)
+
+            for (int i=0; i< rows.Length-2; i++)
             {
                 String row = rows[i];
                 String[] cells = row.Split(',');
+
                 try
                 {
                     DataGridViewRow rowcur = table.Rows[table.Rows.Add(cells)];
@@ -129,9 +133,10 @@ namespace ExpenseManager
                     }
                 } catch
                 {
-                    System.Windows.Forms.MessageBox.Show("There was an error while importing your data. Please try again.");
+                    MessageBox.Show("There was an error while importing your data. Please try again.");
                     return;
                 }
+
             }
             table.Refresh();
             tablesave_flag = true;
@@ -143,27 +148,29 @@ namespace ExpenseManager
             this.total.Text = total.ToString();
         }
 
+        private BindingList<String> lmonths = new BindingList<String>();
+
         private void MontlyExpenses_Load(object sender, EventArgs e)
         {
+            //loading months to combobox
             ComboBox months = this.months;
             String path = "C:\\Users\\nitzansh\\Downloads\\";
             DirectoryInfo d = new DirectoryInfo(path); 
             FileInfo[] Files = d.GetFiles("*.csv"); //Getting csv files
 
-            string vals = "";
-
             foreach (FileInfo file in Files)
             {
-                vals +=  file.Name.Split('.')[0] + ", ";
+                lmonths.Add(file.Name.Split('.')[0]);
             }
-            vals = vals.Remove(vals.Length - 2, 1);
-            foreach (String val in vals.Split(','))
+            months.DataSource = lmonths;
+            if(months.Items.Count > 0)
             {
-                months.Items.Add(val);
+                months.SelectedIndex = 0;
+
             }
-            months.SelectedIndex = 0;
 
 
+            //loading the categoris
             DataGridViewComboBoxColumn category = this.category;
             String[] categories = { "food", "clothes", "bills" };
             foreach (String val in categories)
