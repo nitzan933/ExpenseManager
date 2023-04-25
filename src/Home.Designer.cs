@@ -71,6 +71,7 @@
             this.settings.TabIndex = 3;
             this.settings.Text = "settings";
             this.settings.UseVisualStyleBackColor = true;
+            this.settings.Click += new System.EventHandler(this.settings_Click);
             // 
             // home
             // 

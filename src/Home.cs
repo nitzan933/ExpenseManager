@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExpenseManager.src;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,8 @@ namespace ExpenseManager
 {
     public static class FormState
     {
-        public static Stack<Form> monthlyExpenseStack = new Stack<Form>();
+        public static Form monthlyExpenseForm;
+        public static Form settingsForm;
     }
 
     public partial class Home : Form
@@ -25,17 +27,34 @@ namespace ExpenseManager
         private void monthlyExpenses_Click(object sender, EventArgs e)
         {
             MontlyExpenses form;
-            if (FormState.monthlyExpenseStack.Count() == 0)
+            this.Hide();
+            if (FormState.monthlyExpenseForm == null)
             {
                 form = new MontlyExpenses();
+                form.ShowDialog();
             }
             else
             {
-                form = (MontlyExpenses)FormState.monthlyExpenseStack.Pop();
+                form = (MontlyExpenses)FormState.monthlyExpenseForm;
+                form.Show();
             }
+            this.Close();
+        }
+        private void settings_Click(object sender, EventArgs e)
+        {
+            Settings form;
             this.Hide();
-            FormState.monthlyExpenseStack.Push(this);
-            form.Show();
+            if (FormState.settingsForm == null)
+            {
+                form = new Settings();
+                form.ShowDialog();
+            }
+            else
+            {
+                form = (Settings)FormState.settingsForm;
+                form.Show();
+            }
+            this.Close();
         }
     }
 }

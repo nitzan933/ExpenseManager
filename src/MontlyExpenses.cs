@@ -32,14 +32,15 @@ namespace ExpenseManager
 
         private void home_Click(object sender, EventArgs e)
         {
-            Form form = FormState.monthlyExpenseStack.Pop();
-            FormState.monthlyExpenseStack.Push(this);
+            Form form = new Home();
+            FormState.monthlyExpenseForm = this;
             this.Hide();
-            form.Show();
+            form.ShowDialog();
         }
 
         private void ExpensesByMonth_DefaultValuesNeeded(object sender, System.Windows.Forms.DataGridViewRowEventArgs e)
         {
+            e.Row.Cells["income"].Value = false;
             e.Row.Cells["date"].Value = DateTime.Now.ToString("dd/MM/yyyy");
             e.Row.Cells["continual"].Value = false;
             e.Row.Cells["amount"].Value = 0;
@@ -119,7 +120,7 @@ namespace ExpenseManager
             String[] rows = data.Split('\n');
             table.Rows.Clear();
 
-            for (int i=0; i< rows.Length-2; i++)
+            for (int i=0; i< rows.Length-1; i++)
             {
                 String row = rows[i];
                 String[] cells = row.Split(',');
@@ -141,11 +142,8 @@ namespace ExpenseManager
             table.Refresh();
             tablesave_flag = true;
 
+            sumAmount();
 
-            double total = 0;
-            foreach (DataGridViewRow row in table.Rows)
-                try { total += Convert.ToDouble(row.Cells["amount"].Value); } catch { }
-            this.total.Text = total.ToString();
         }
 
         private BindingList<String> lmonths = new BindingList<String>();
@@ -188,16 +186,39 @@ namespace ExpenseManager
         private void ExpensesByMonth_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             tablesave_flag = false;
-
-            DataGridView table = this.ExpensesByMonth;
-            if (table.Columns[e.ColumnIndex].Name == "amount") //update total amount in every cell's update
+            if (this.ExpensesByMonth.Columns[e.ColumnIndex].Name == "amount") 
             {
-                double total = 0;
-                foreach (DataGridViewRow row in table.Rows)
-                    try { total += Convert.ToDouble(row.Cells["amount"].Value); } catch { }
-                this.total.Text = total.ToString();
+                sumAmount();
             }
+        }
 
+        private void sumAmount()
+        {
+            DataGridView table = this.ExpensesByMonth;
+            
+            double total = 0;
+            foreach (DataGridViewRow row in table.Rows)
+                try
+                {
+                    if (Convert.ToBoolean(row.Cells["income"].Value))
+                    {
+                        total += Convert.ToDouble(row.Cells["amount"].Value);
+                    }
+                    else
+                    {
+                        total -= Convert.ToDouble(row.Cells["amount"].Value);
+                    }
+                } catch { }
+                
+            if (total < 0)
+            {
+                this.total.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                this.total.ForeColor = System.Drawing.Color.Green;
+            }
+            this.total.Text = total.ToString();
         }
 
     }
