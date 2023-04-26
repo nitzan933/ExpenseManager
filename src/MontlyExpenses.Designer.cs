@@ -98,7 +98,6 @@ namespace ExpenseManager
             this.ExpensesByMonth.Size = new System.Drawing.Size(1191, 510);
             this.ExpensesByMonth.TabIndex = 2;
             this.ExpensesByMonth.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExpensesByMonth_CellEndEdit);
-            this.ExpensesByMonth.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.ExpensesByMonth_CellMouseClick);
             this.ExpensesByMonth.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.ExpensesByMonth_DefaultValuesNeeded);
             // 
             // home

@@ -41,10 +41,13 @@ namespace ExpenseManager
         private void ExpensesByMonth_DefaultValuesNeeded(object sender, System.Windows.Forms.DataGridViewRowEventArgs e)
         {
             e.Row.Cells["income"].Value = false;
-            e.Row.Cells["date"].Value = DateTime.Now.ToString("dd/MM/yyyy");
-            e.Row.Cells["continual"].Value = false;
+            e.Row.Cells["description"].Value = "";
+            e.Row.Cells["category"].Value = "";
             e.Row.Cells["amount"].Value = 0;
+            e.Row.Cells["date"].Value = DateTime.Now.ToString("dd/MM/yyyy");
             e.Row.Cells["payments"].Value = 1;
+            e.Row.Cells["continual"].Value = false;
+            e.Row.Cells["comments"].Value = "";
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -53,26 +56,18 @@ namespace ExpenseManager
             String month = this.months.Text;
             String fileName = path + "\\" + month + ".csv";
             DataGridView table = this.ExpensesByMonth;
-
-            string[] outputCsv = new string[table.Rows.Count];
-
-            for (int i = 0; i < table.Rows.Count - 1; i++)
-            {
-                for (int j = 0; j < table.Columns.Count; j++)
-                {
-                    var val = table.Rows[i].Cells[j].Value;
-                    if (val != null)
-                    {
-                        outputCsv[i] += val.ToString() + ",";
-                    }
-                    else
-                    {
-                        outputCsv[i] += ",";
-                    }
-                }
-            }
+            string[] outputCsv = new string[table.Rows.Count-1];
             try
             {
+                for (int i = 0; i < table.Rows.Count-1; i++)
+                {
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        var val = table.Rows[i].Cells[j].Value;
+                        outputCsv[i] += val.ToString() + ",";
+
+                    }
+                }
                 File.WriteAllLines(fileName, outputCsv, Encoding.UTF8);
                 System.Windows.Forms.MessageBox.Show("Your data is saved.");
                 tablesave_flag = true;
@@ -171,11 +166,6 @@ namespace ExpenseManager
                 category.Items.Add(val);
             }
 
-        }
-
-        private void ExpensesByMonth_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-      
         }
 
         private void ExpensesByMonth_CellEndEdit(object sender, DataGridViewCellEventArgs e)
