@@ -190,11 +190,8 @@ namespace ExpenseManager
             // 
             // continual
             // 
-            this.continual.FalseValue = "";
             this.continual.HeaderText = "continual";
-            this.continual.MinimumWidth = 6;
             this.continual.Name = "continual";
-            this.continual.Width = 70;
             // 
             // comments
             // 

@@ -54,12 +54,11 @@ namespace ExpenseManager
             String fileName = path + "\\" + month + ".csv";
             DataGridView table = this.ExpensesByMonth;
 
-            int columnCount = table.Columns.Count;
             string[] outputCsv = new string[table.Rows.Count];
 
             for (int i = 0; i < table.Rows.Count - 1; i++)
             {
-                for (int j = 0; j < columnCount; j++)
+                for (int j = 0; j < table.Columns.Count; j++)
                 {
                     var val = table.Rows[i].Cells[j].Value;
                     if (val != null)
@@ -128,10 +127,6 @@ namespace ExpenseManager
                 try
                 {
                     DataGridViewRow rowcur = table.Rows[table.Rows.Add(cells)];
-                    if (Convert.ToBoolean(rowcur.Cells["continual"].Value) != true)
-                    {
-                        rowcur.Cells["continual"].Value = false;
-                    }
                 } catch
                 {
                     MessageBox.Show("There was an error while importing your data. Please try again.");
@@ -170,7 +165,7 @@ namespace ExpenseManager
 
             //loading the categoris
             DataGridViewComboBoxColumn category = this.category;
-            String[] categories = { "food", "clothes", "bills" };
+            String[] categories = { "food", "clothes", "bills" , "leasure"};
             foreach (String val in categories)
             {
                 category.Items.Add(val);
@@ -186,7 +181,7 @@ namespace ExpenseManager
         private void ExpensesByMonth_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             tablesave_flag = false;
-            if (this.ExpensesByMonth.Columns[e.ColumnIndex].Name == "amount") 
+            if (this.ExpensesByMonth.Columns[e.ColumnIndex].Name == "amount" || this.ExpensesByMonth.Columns[e.ColumnIndex].Name == "income") 
             {
                 sumAmount();
             }
