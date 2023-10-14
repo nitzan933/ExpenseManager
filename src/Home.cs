@@ -11,14 +11,15 @@ using System.Windows.Forms;
 
 namespace ExpenseManager
 {
-    public class FormState
-    {
-        public MontlyExpenses monthlyExpenseForm {  get; set; }
-        public Settings settingsForm {  get; set; }
-    }
-
+    
     public partial class Home : Form
     {
+        public class FormState
+        {
+            public MontlyExpenses monthlyExpenseForm { get; set; }
+            public Settings settingsForm { get; set; }
+        }
+
         public FormState formState;
         public Home()
         {
@@ -38,5 +39,6 @@ namespace ExpenseManager
             this.Hide();
             formState.settingsForm.Show();
         }
+
     }
 }

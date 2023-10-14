@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             this.home = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,13 +41,14 @@
             // home
             // 
             this.home.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.home.Location = new System.Drawing.Point(785, 13);
-            this.home.Margin = new System.Windows.Forms.Padding(4);
+            this.home.BackColor = System.Drawing.Color.MidnightBlue;
+            this.home.ForeColor = System.Drawing.Color.DarkCyan;
+            this.home.Image = ((System.Drawing.Image)(resources.GetObject("home.Image")));
+            this.home.Location = new System.Drawing.Point(584, 11);
             this.home.Name = "home";
-            this.home.Size = new System.Drawing.Size(68, 58);
+            this.home.Size = new System.Drawing.Size(56, 56);
             this.home.TabIndex = 4;
-            this.home.Text = "home";
-            this.home.UseVisualStyleBackColor = true;
+            this.home.UseVisualStyleBackColor = false;
             this.home.Click += new System.EventHandler(this.home_Click);
             // 
             // label1
@@ -54,10 +56,11 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(363, 13);
+            this.label1.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(272, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(113, 31);
+            this.label1.Size = new System.Drawing.Size(120, 39);
             this.label1.TabIndex = 5;
             this.label1.Text = "Settings";
             // 
@@ -66,9 +69,11 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(115, 119);
+            this.label2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(86, 97);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 16);
+            this.label2.Size = new System.Drawing.Size(95, 15);
             this.label2.TabIndex = 6;
             this.label2.Text = "path to CSV files";
             // 
@@ -80,9 +85,10 @@
             // 
             this.openDialog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.openDialog.Location = new System.Drawing.Point(729, 119);
+            this.openDialog.Location = new System.Drawing.Point(547, 97);
+            this.openDialog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.openDialog.Name = "openDialog";
-            this.openDialog.Size = new System.Drawing.Size(34, 23);
+            this.openDialog.Size = new System.Drawing.Size(25, 20);
             this.openDialog.TabIndex = 7;
             this.openDialog.Text = "...";
             this.openDialog.UseVisualStyleBackColor = true;
@@ -92,18 +98,19 @@
             // 
             this.path.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.path.Location = new System.Drawing.Point(238, 119);
+            this.path.Location = new System.Drawing.Point(178, 97);
+            this.path.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.path.Name = "path";
-            this.path.Size = new System.Drawing.Size(485, 22);
+            this.path.Size = new System.Drawing.Size(365, 20);
             this.path.TabIndex = 8;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(369, 391);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(277, 318);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 46);
+            this.button1.Size = new System.Drawing.Size(96, 37);
             this.button1.TabIndex = 9;
             this.button1.Text = "save";
             this.button1.UseVisualStyleBackColor = true;
@@ -111,15 +118,17 @@
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 450);
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ClientSize = new System.Drawing.Size(650, 366);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.path);
             this.Controls.Add(this.openDialog);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.home);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Settings";
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Settings_FormClosing);
