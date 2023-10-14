@@ -18,9 +18,13 @@ namespace ExpenseManager
 
     public partial class MontlyExpenses : Form
     {
-        public MontlyExpenses()
+        public Home homeForm;
+        public string folderPath { get; set; }
+        public MontlyExpenses(Home homeForm)
         {
             InitializeComponent();
+            this.homeForm = homeForm;
+            folderPath = homeForm.formState.settingsForm.folderPath;
         }
 
         private void MontlyExpenses_FormClosing(object sender, FormClosingEventArgs e)
@@ -32,10 +36,9 @@ namespace ExpenseManager
 
         private void home_Click(object sender, EventArgs e)
         {
-            Form form = new Home();
-            FormState.monthlyExpenseForm = this;
+            homeForm.formState.monthlyExpenseForm = this;
             this.Hide();
-            form.ShowDialog();
+            homeForm.Show();
         }
 
         private void ExpensesByMonth_DefaultValuesNeeded(object sender, System.Windows.Forms.DataGridViewRowEventArgs e)
@@ -52,9 +55,8 @@ namespace ExpenseManager
 
         private void save_Click(object sender, EventArgs e)
         {
-            String path = "C:\\Users\\nitzansh\\Downloads";
             String month = this.months.Text;
-            String fileName = path + "\\" + month + ".csv";
+            String fileName = folderPath + "\\" + month + ".csv";
             DataGridView table = this.ExpensesByMonth;
             string[] outputCsv = new string[table.Rows.Count-1];
             try
@@ -99,9 +101,8 @@ namespace ExpenseManager
                 }
             }
             
-            String path = "C:\\Users\\nitzansh\\Downloads";
             String month = this.months.SelectedItem.ToString();
-            String fileName = path + "\\" + month + ".csv";
+            String fileName = folderPath + "\\" + month + ".csv";
             String data;
             try
             {
@@ -142,8 +143,7 @@ namespace ExpenseManager
         {
             //loading months to combobox
             ComboBox months = this.months;
-            String path = "C:\\Users\\nitzansh\\Downloads\\";
-            DirectoryInfo d = new DirectoryInfo(path); 
+            DirectoryInfo d = new DirectoryInfo(folderPath); 
             FileInfo[] Files = d.GetFiles("*.csv"); //Getting csv files
 
             foreach (FileInfo file in Files)

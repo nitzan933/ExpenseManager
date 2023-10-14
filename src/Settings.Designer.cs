@@ -34,6 +34,7 @@
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openDialog = new System.Windows.Forms.Button();
             this.path = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // home
@@ -56,7 +57,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(363, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 26);
+            this.label1.Size = new System.Drawing.Size(113, 31);
             this.label1.TabIndex = 5;
             this.label1.Text = "Settings";
             // 
@@ -96,11 +97,24 @@
             this.path.Size = new System.Drawing.Size(485, 22);
             this.path.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(369, 391);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 46);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "save";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.save_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.path);
             this.Controls.Add(this.openDialog);
             this.Controls.Add(this.label2);
@@ -108,6 +122,8 @@
             this.Controls.Add(this.home);
             this.Name = "Settings";
             this.Text = "Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Settings_FormClosing);
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +137,6 @@
         public System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button openDialog;
         private System.Windows.Forms.TextBox path;
+        private System.Windows.Forms.Button button1;
     }
 }

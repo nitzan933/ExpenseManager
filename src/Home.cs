@@ -11,50 +11,32 @@ using System.Windows.Forms;
 
 namespace ExpenseManager
 {
-    public static class FormState
+    public class FormState
     {
-        public static Form monthlyExpenseForm;
-        public static Form settingsForm;
+        public MontlyExpenses monthlyExpenseForm {  get; set; }
+        public Settings settingsForm {  get; set; }
     }
 
     public partial class Home : Form
     {
+        public FormState formState;
         public Home()
         {
             InitializeComponent();
+            formState = new FormState();
+            formState.settingsForm = new Settings(this);
+            formState.monthlyExpenseForm = new MontlyExpenses(this); 
         }
 
         private void monthlyExpenses_Click(object sender, EventArgs e)
         {
-            MontlyExpenses form;
             this.Hide();
-            if (FormState.monthlyExpenseForm == null)
-            {
-                form = new MontlyExpenses();
-                form.ShowDialog();
-            }
-            else
-            {
-                form = (MontlyExpenses)FormState.monthlyExpenseForm;
-                form.Show();
-            }
-            this.Close();
+            formState.monthlyExpenseForm.Show();
         }
         private void settings_Click(object sender, EventArgs e)
         {
-            Settings form;
             this.Hide();
-            if (FormState.settingsForm == null)
-            {
-                form = new Settings();
-                form.ShowDialog();
-            }
-            else
-            {
-                form = (Settings)FormState.settingsForm;
-                form.Show();
-            }
-            this.Close();
+            formState.settingsForm.Show();
         }
     }
 }
